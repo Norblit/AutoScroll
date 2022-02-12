@@ -1,20 +1,43 @@
-.main-section{
-width: 60%;
-}
-.read{
-    /* border: solid red; */
-    /* border-left: dotted; */
-    /* border-right: dotted; */
-    border-top: outset;
-    border-bottom: inset;
+.btn:focus {
+    box-shadow: none;
+  }
+.read,.read2{
+    border-top: outset black;
+    border-bottom: inset black;
     padding-top: 1%;
-    /* padding-left: 1%; */
-    /* padding-right: 1%; */
-    color: grey;
+    /* color: grey; */
     font-size: 1em;
     overflow: hidden;
     height: 300px;
 }
+.read2{
+    border-top: outset white;
+    border-bottom: inset white;
+}
 .form-range{
     width: 50%;
+}
+.inputText2{
+    background-color: rgb(66, 66, 66);
+    color: white;
+}
+.inputText2:focus{
+    color: white;
+    background-color: rgb(66, 66, 66);
+}
+.darkMode{
+    position: relative;
+    border: inset white;
+    height: 2em;
+    background-color: black;
+}
+.darkMode:hover{
+    background-color: rgba(0, 0, 0, .8);
+}
+.moonImg{
+    width: 3em;
+}
+.moonImg2{
+    width: 3em;
+    filter: invert(91%) sepia(100%) saturate(2%) hue-rotate(101deg) brightness(104%) contrast(101%);
 }
