@@ -10,26 +10,35 @@
 </head>
 <body>
     <div class="container">
+        
+        <div class="row mx-auto text-center">
+            <div class="col-12">
+                <h1 class="mainTitle mt-3 text-center">AutoScroll</h1>
+            </div>
+            <div class="col mb-2">
+                <img class="moonImg" src="./images/moon.svg" alt="">
+                <button class="btn col-1 darkMode"></button>
+            </div>
+        </div>
+        
         <div class="main-section text-center mx-auto">
-            <h1 class="mainTitle mt-3">Scroll By</h1>
-            <p>Enjoy your reading at your own pace. Simply enter your reading material (text) into the input, click submit and set your environment. You have control over the font size and scrolling speed, once you're ready just click start. You can always go back and change them even while it's scrolling.</p>
+            <p>Enjoy reading at your own pace. Simply enter your reading material (text) into the input, click submit to transfer the data, set your environment using the control panel, and click start. You can always go back and change them even while it's scrolling.</p>
         </div>
         <div class="input-section">
             <h4>Paste your reading material here:</h4>
             <div class="form-floating">
                 <textarea class="form-control inputText" placeholder="Leave a comment here" id="floatingTextarea2" style="height: 100px" ></textarea>
-                <!-- <label for="floatingTextarea2">Enter your text here...</label> -->
                 <button class="textFormat btn btn-primary mt-2 w-4">Submit</button>
             </div>
         </div>
         <hr>
 
         <div class="control-panel text-center">
-            <!-- <label for="customRange3" class="form-label">Font Size:</label> -->
-            <!-- <input type="range" class="form-range font-size-slider" min="0" max="6" step="1" value="1" id="customRange3">     -->
+            <h5>Control Panel</h5>
             <button class="btn btn-warning fsBtn">Font Size: 1x</button>
             <button class="btn btn-info speedBtn">Speed: 1x</button>
             <button class="btn btn-success startBtn">Start</button>
+            <button class="btn btn-danger stopBtn">Stop</button>
         </div>
 
         <div class="text-section">
