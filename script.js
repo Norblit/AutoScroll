@@ -1,13 +1,60 @@
 const formControl = document.querySelector('.form-control');
 const formatBtn = document.querySelector('.textFormat')
 const read = document.querySelector('.read')
-const startBtn = document.querySelector('.startBtn')
-const fsBtn = document.querySelector('.fsBtn')
-const speedBtn = document.querySelector('.speedBtn')
-const fsSlider = document.querySelector('.font-size-slider')
 const input = document.querySelector('.inputText')
 
+// control panel
+const fsBtn = document.querySelector('.fsBtn')
+const speedBtn = document.querySelector('.speedBtn')
+const startBtn = document.querySelector('.startBtn')
+const stopBtn = document.querySelector('.stopBtn')
+stopBtn.disabled = true
 
+// dark mode elements
+const darkTgl = document.querySelector('.darkMode')
+const moonImg = document.querySelector('.moonImg')
+const body = document.querySelector('body')
+
+let isWhiteMode = true; //it is white
+
+darkTgl.addEventListener('click',()=>{
+    if(isWhiteMode){
+        // Background is black
+        input.classList.remove('inputText')
+        input.classList.add('inputText2')
+
+        body.style.backgroundColor = '#323232'
+        body.style.color = 'white'
+
+        darkTgl.style.backgroundColor = 'lightgrey'
+        darkTgl.style.color = 'black'
+
+        read.classList.remove('read')
+        read.classList.add('read2')
+
+        moonImg.classList.remove('moonImg')
+        moonImg.classList.add('moonImg2')
+
+        isWhiteMode = false;
+    }else{
+        // Background is white
+        input.classList.remove('inputText2')
+        input.classList.add('inputText')
+
+        body.style.backgroundColor = 'white'
+        body.style.color = 'black'
+
+        darkTgl.style.backgroundColor = 'black'
+        darkTgl.style.color = 'white'
+
+        read.classList.remove('read2')
+        read.classList.add('read')
+
+        moonImg.classList.remove('moonImg2')
+        moonImg.classList.add('moonImg')
+        isWhiteMode = true;
+    }
+})
 
 let fontSize = 1;
 let x = 1;
@@ -20,12 +67,10 @@ formatBtn.addEventListener('click',(e)=>{
     read.innerHTML = '';
     // create/insert text into text section
     let text = formControl.value;
-    let el = document.createElement('p');
-    el.append(text);
-    read.append(el);
+    sessionStorage.setItem('inputContent', text)
+    read.innerHTML =`<p>${text}</p>`
     // clear input
     formControl.value = '';
-    
     input.style.height = '100px'
 })
 
@@ -60,37 +105,31 @@ speedBtn.addEventListener('click', (e)=>{
             break;
     }
 })
+
+let isStarted = false;
+
 // Button to initiate scrolling process
 startBtn.addEventListener('click',(e)=>{
-    pageScroll();
-    console.log('Scroll speed (start):', scrollingSpeed);
+    if(read.textContent){
+        pageScroll();
+        console.log('Scroll speed (start):', scrollingSpeed);
+        startBtn.disabled = true
+        isStarted = true
+        stopBtn.disabled = false;
+
+    }else{
+        console.log('no text')
+    }
+    // turns into pause button
+})
+stopBtn.addEventListener('click',()=>{
+    startBtn.disabled = false
+    // read.innerHTML = `<p>${sessionStorage.getItem('inputContent')}</p>`
+    clearTimeout(scrolldelay);
+    read.scrollTo(1, 1);
 })
 function pageScroll() {
-    read.scrollBy(0,1);
-    console.log('Scroll Speed (fn)', scrollingSpeed)
-    scrolldelay = setTimeout(pageScroll, scrollingSpeed);
-    // console.log(read.scroll.)
+        read.scrollBy(0,1);
+        console.log('Scroll Speed (fn)', scrollingSpeed)
+        scrolldelay = setTimeout(pageScroll, scrollingSpeed);
 }
-
-
-
-
-
-// Font Size Slider
-// fsSlider.addEventListener('mouseup', (e)=>{
-//     if(fsSlider.value == 0){
-//         read.style.fontSize = '.7em'
-//     }else if(fsSlider.value == 1){
-//         read.style.fontSize = '1em'
-//     }else if(fsSlider.value == 2){
-//         read.style.fontSize = '1.5em'
-//     }else if(fsSlider.value == 3){
-//         read.style.fontSize = '2em'
-//     }else if(fsSlider.value == 4){
-//         read.style.fontSize = '2.5em'
-//     }else if(fsSlider.value == 5){
-//         read.style.fontSize = '3em'
-//     }else if(fsSlider.value == 6){
-//         read.style.fontSize = '3.5em'
-//     }
-// })
