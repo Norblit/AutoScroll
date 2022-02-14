@@ -1,5 +1,5 @@
 # AutoScroll v2.0
-Small fun program intended to be used as an alternative environment to read your reading material (article, pdf, poems, stories, etc) without the need to scroll manually along with the extra settings to adjust your scrolling speed and font size.
+Small fun program intended to be used as an alternative environment to read your reading material (article, pdf, poems, stories, etc) without the need to scroll manually.
 
 Check the live version at [AutoScroll](https://norblit.github.io/AutoScroll/)
 
