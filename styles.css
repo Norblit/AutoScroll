@@ -1,43 +1,92 @@
+body{
+    background-color: white;
+    /* 74959A */
+    /* background-color: #74959A; */
+}
 .btn:focus {
     box-shadow: none;
-  }
-.read,.read2{
+}
+
+/* Top Section */
+.titleContainer{
+    overflow: hidden;
+}
+#darkSwitch{
+    width: 3em;
+    height: 1.5em;
+    color: black;
+    border: solid black;
+}
+#darkSwitch:checked{
+    background-color: rgb(66, 66, 66);
+    color: white;
+    border: solid white;
+}
+#darkSwitch:focus {
+    box-shadow: none;
+}
+#darkSwitch::after{
+    color: blue;
+    background-color: blue;
+}
+.main-section{
+    background-color: #ebebeb;
     border-top: outset black;
     border-bottom: inset black;
-    padding-top: 1%;
-    /* color: grey; */
+    border-radius: .4em;
+    padding: 1em;
+}
+.main-section2{
+    background-color: #262626;
+    border-top: outset grey;
+    border-bottom: inset grey;
+    border-radius: .4em;
+    padding: 1em;
+}
+
+.inputText, .inputText:focus{
+    box-shadow: none;
+    border: none;
+}
+.inputText2, .inputText2:focus{
+    background-color: rgb(66, 66, 66);
+    color: white;
+    box-shadow: none;
+    border: none;
+}
+
+/* Control Panel/Read Section */
+.control-panel{
+    background-color: #ebebeb;
+    border-top: outset black;
+    border-bottom: inset black;
+    border-radius: .4em;
+    padding: 1em;
+}
+.control-panel2{
+    background-color: #262626;
+    border-top: outset grey;
+    border-bottom: inset grey;
+    border-radius: .4em;
+    padding: 1em;
+    padding-bottom: 0%;
+}
+.read2{
+    border-top: solid grey;
     font-size: 1em;
     overflow: hidden;
     height: 300px;
 }
-.read2{
-    border-top: outset white;
-    border-bottom: inset white;
+.read{
+    border-top: solid black;
+    font-size: 1em;
+    overflow: hidden;
+    height: 300px;
 }
-.form-range{
-    width: 50%;
+.darkModeContainer{
+    display: flex;
+    justify-content: center;
 }
-.inputText2{
-    background-color: rgb(66, 66, 66);
-    color: white;
-}
-.inputText2:focus{
-    color: white;
-    background-color: rgb(66, 66, 66);
-}
-.darkMode{
-    position: relative;
-    border: inset white;
-    height: 2em;
-    background-color: black;
-}
-.darkMode:hover{
-    background-color: rgba(0, 0, 0, .8);
-}
-.moonImg{
-    width: 3em;
-}
-.moonImg2{
-    width: 3em;
-    filter: invert(91%) sepia(100%) saturate(2%) hue-rotate(101deg) brightness(104%) contrast(101%);
+.readTitle{
+    margin-bottom: 0%;
 }
