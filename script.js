@@ -1,80 +1,53 @@
+const mainTitle = document.querySelector('.mainTitle')
+
+// main section
+const mainSection = document.querySelector('.main-section')
 const formControl = document.querySelector('.form-control');
 const formatBtn = document.querySelector('.textFormat')
-const read = document.querySelector('.read')
 const input = document.querySelector('.inputText')
 
 // control panel
+const controlPnl = document.querySelector('.control-panel')
 const fsBtn = document.querySelector('.fsBtn')
 const speedBtn = document.querySelector('.speedBtn')
 const startBtn = document.querySelector('.startBtn')
-const stopBtn = document.querySelector('.stopBtn')
-stopBtn.disabled = true
+const resetBtn = document.querySelector('.resetBtn')
+const clearBtn = document.querySelector('.clearBtn')
+const read = document.querySelector('.read')
+resetBtn.disabled = true
 
 // dark mode elements
-const darkTgl = document.querySelector('.darkMode')
-const moonImg = document.querySelector('.moonImg')
+const darkSwitch = document.querySelector('#darkSwitch')
 const body = document.querySelector('body')
 
-let isWhiteMode = true; //it is white
-
-darkTgl.addEventListener('click',()=>{
-    if(isWhiteMode){
-        // Background is black
-        input.classList.remove('inputText')
-        input.classList.add('inputText2')
-
-        body.style.backgroundColor = '#323232'
-        body.style.color = 'white'
-
-        darkTgl.style.backgroundColor = 'lightgrey'
-        darkTgl.style.color = 'black'
-
-        read.classList.remove('read')
-        read.classList.add('read2')
-
-        moonImg.classList.remove('moonImg')
-        moonImg.classList.add('moonImg2')
-
-        isWhiteMode = false;
-    }else{
-        // Background is white
-        input.classList.remove('inputText2')
-        input.classList.add('inputText')
-
-        body.style.backgroundColor = 'white'
-        body.style.color = 'black'
-
-        darkTgl.style.backgroundColor = 'black'
-        darkTgl.style.color = 'white'
-
-        read.classList.remove('read2')
-        read.classList.add('read')
-
-        moonImg.classList.remove('moonImg2')
-        moonImg.classList.add('moonImg')
-        isWhiteMode = true;
-    }
+//  COOKIE VALIDATION
+if(Cookies.get('darkMode')){ // if the cookie exists
+    var isDarkCookie = Cookies.get('darkMode')  // then put it in a variable
+    darkMode(Cookies.get('darkMode') == 'true')  // pass the value into darkMode
+    // converting string to boolean
+    let isOn = isDarkCookie === 'true'
+    darkSwitch.checked = isOn
+}
+// DARK MODE SWITCH
+darkSwitch.addEventListener('click',()=>{
+    darkMode(darkSwitch.checked == true)
 })
-
-let fontSize = 1;
-let x = 1;
-let speedCounter = 1;
-let scrollingSpeed = 100;
-
-// Button to paste text into the read class within the text-section; removed the text within the input; 
+// INPUT SUBMIT BUTTON
 formatBtn.addEventListener('click',(e)=>{
     // clear text-section
     read.innerHTML = '';
     // create/insert text into text section
     let text = formControl.value;
-    sessionStorage.setItem('inputContent', text)
     read.innerHTML =`<p>${text}</p>`
     // clear input
     formControl.value = '';
-    input.style.height = '100px'
 })
 
-// Button to adjust font-size by one em
+// CONTROL PANEL > FONT SIZE BUTTON
+let fontSize = 1;
+let x = 1;
+let speedCounter = 1;
+let scrollingSpeed = 100;
 fsBtn.addEventListener('click',(e)=>{
     let x = fontSize
     read.style.fontSize = `${fontSize += .5}em`;
@@ -83,7 +56,7 @@ fsBtn.addEventListener('click',(e)=>{
         fontSize = .5;
     }
 })
-// Button to adjust scrolling speed
+// CONTROL PANEL > SCROLL SPEED BUTTON
 speedBtn.addEventListener('click', (e)=>{
     speedBtn.innerHTML = `Speed: ${++speedCounter}x`
     console.log(speedCounter)
@@ -105,31 +78,67 @@ speedBtn.addEventListener('click', (e)=>{
             break;
     }
 })
-
+// CONTROL PANEL > START BUTTON
 let isStarted = false;
-
-// Button to initiate scrolling process
 startBtn.addEventListener('click',(e)=>{
     if(read.textContent){
         pageScroll();
         console.log('Scroll speed (start):', scrollingSpeed);
         startBtn.disabled = true
         isStarted = true
-        stopBtn.disabled = false;
-
+        resetBtn.disabled = false;
     }else{
         console.log('no text')
     }
     // turns into pause button
 })
-stopBtn.addEventListener('click',()=>{
+// CONTROL PANEL > RESET BUTTON 
+resetBtn.addEventListener('click',()=>{
     startBtn.disabled = false
-    // read.innerHTML = `<p>${sessionStorage.getItem('inputContent')}</p>`
     clearTimeout(scrolldelay);
     read.scrollTo(1, 1);
 })
+// CONTROL PANEL > CLEAR BUTTON 
+clearBtn.addEventListener('click',()=>{
+    startBtn.disabled = false
+    clearTimeout(scrolldelay);
+    read.scrollTo(1, 1);
+    read.innerHTML = "";
+})
+
 function pageScroll() {
         read.scrollBy(0,1);
         console.log('Scroll Speed (fn)', scrollingSpeed)
         scrolldelay = setTimeout(pageScroll, scrollingSpeed);
+}
+function darkMode(option){
+    if(option){
+        // DARK MODE: ON
+        Cookies.set('darkMode','true', { expires: 30 })
+        // input form
+        input.classList.replace('inputText', 'inputText2')
+        // main panel
+        mainSection.classList.replace('main-section','main-section2')
+        // control panel
+        controlPnl.classList.replace('control-panel','control-panel2')
+        // read section
+        read.classList.replace('read', 'read2')
+
+        body.style.backgroundColor = '#323232'
+        body.style.color = 'white'
+    }else{
+        // DARK MODE: OFF
+        Cookies.set('darkMode','false', { expires: 30 })
+        // input form
+        input.classList.replace('inputText2', 'inputText')
+        // main panel
+        mainSection.classList.replace('main-section2','main-section')
+        // control panel
+        controlPnl.classList.replace('control-panel2','control-panel')
+        // read section
+        read.classList.replace('read2', 'read')
+
+        body.style.backgroundColor = 'white'
+        body.style.color = 'black'
+    }
 }
